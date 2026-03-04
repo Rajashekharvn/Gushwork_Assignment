@@ -1,0 +1,6 @@
+log.txt
+*.tmp
+matches.txt
+final_check.txt
+node_modules/
+.DS_Store

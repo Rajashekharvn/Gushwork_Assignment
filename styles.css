@@ -1,0 +1,1958 @@
+/**
+ * Mangalam HDPE Pipes – Main Stylesheet
+ * ----------------------------------------
+ * Structure:
+ *   1.  CSS Variables & Reset   – Design tokens (colors, fonts, spacing) and box-model reset.
+ *   2.  Utilities               – Reusable helper classes (margins, paddings, flex helpers).
+ *   3.  Buttons & Inputs        – All button variants and form input styles.
+ *   4.  Header & Navigation     – Main sticky header and nav link styles.
+ *   5.  Hero Product Layout     – Product image carousel + info panel, single-viewport design.
+ *   6.  Trusted By Logos        – Brand logo strip section.
+ *   7.  Technical Specifications – Dark-themed specs table section.
+ *   8.  Features Grid           – 3-column responsive feature card grid.
+ *   9.  Versatile Applications  – Image card grid with gradient overlay text.
+ *  10.  Manufacturing Process   – Step-by-step process card with tab navigation.
+ *  11.  Testimonials            – 3-column testimonial card grid.
+ *  12.  Solutions Portfolio     – Product category cards with images and CTAs.
+ *  13.  FAQs                    – Accordion-style question/answer list.
+ *  14.  Resources & Downloads   – PDF download link list.
+ *  15.  Contact Block           – Dark CTA section with embedded contact form.
+ *  16.  Footer                  – Multi-column footer with links, social icons, and copyright.
+ *  17.  Responsive Breakpoints  – Media queries for tablet (1024px), mobile (768px), small (480px).
+ *
+ * Typography : 'Outfit' (Google Fonts) – weights 300/400/500/600/700/800
+ * Palette    : Primary Navy #2b3975 | Logo Red #991b1b | Backgrounds #f5f5f5 / #121826
+ */
+
+/* =========================================
+   CSS Reset & Variables
+   ========================================= */
+:root {
+    /* ── COLORS ──────────────────────────────────────────
+       All colors are defined as CSS custom properties (variables)
+       so they can be reused consistently across the entire stylesheet.
+       Changing a color here updates it everywhere it is used.
+    ─────────────────────────────────────────────────── */
+    --bg-main: #f5f5f5;
+    /* Light grey page background */
+    --bg-dark: #121826;
+    /* Dark navy used in technical specs section */
+    --bg-card: #ffffff;
+    /* White background for feature/testimonial cards */
+    --bg-blue: #23315a;
+    /* Deep blue used in the Contact / CTA block */
+    --text-main: #333333;
+    /* Default body text colour */
+    --text-dark: #f8fafc;
+    /* Light text on dark backgrounds (specs section) */
+    --text-muted: #6b7280;
+    /* Subdued text for subtitles and descriptions */
+    --primary-color: #2b3975;
+    /* Brand navy blue – primary buttons, active states */
+    --primary-hover: #1e2b5e;
+    /* Darker shade of primary, used on button hover */
+    --logo-red: #991b1b;
+    /* Deep red for text-based logo styling (legacy) */
+    --border-color: #e5e7eb;
+    /* Light grey border used on cards and dividers */
+    --border-dark: #334155;
+    /* Darker border for the dark specs area */
+
+    /* ── LAYOUT ──────────────────────────────────────────
+       Controls the maximum content width and horizontal padding.
+    ─────────────────────────────────────────────────── */
+    --container-width: 1200px;
+    /* Max content width; keeps text readable on wide screens */
+    --p-inline: 1.5rem;
+    /* Left/right padding inside .container */
+
+    /* ── TYPOGRAPHY ──────────────────────────────────────
+       Single font family used site-wide (loaded from Google Fonts in HTML head).
+    ─────────────────────────────────────────────────── */
+    --font-main: 'Outfit', sans-serif;
+
+    /* ── TRANSITIONS ─────────────────────────────────────
+       Reusable transition durations for consistent animation speed.
+    ─────────────────────────────────────────────────── */
+    --transition-fast: 0.2s ease;
+    /* Quick hover effects (buttons, links) */
+    --transition-normal: 0.3s ease;
+    /* Slightly slower for layouts and scales */
+}
+
+/* Universal selector: removes all default browser margins, paddings, and
+   switches to border-box sizing so padding is included in element widths. */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* Includes padding + border in the element's total width/height */
+}
+
+/* Enables smooth scrolling when clicking anchor links (e.g. #contact, #hero) */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Body defaults: applies global font, background colour, text colour, and
+   prevents horizontal scrollbars caused by overflow (e.g. wide images). */
+body {
+    font-family: var(--font-main);
+    /* Outfit font from Google Fonts */
+    background-color: var(--bg-main);
+    /* Light grey page background */
+    color: var(--text-main);
+    /* Dark grey default text */
+    line-height: 1.6;
+    /* Comfortable line spacing for readability */
+    overflow-x: hidden;
+    /* Prevent horizontal scroll on mobile */
+    /* Subtle SVG noise texture applied as a background image for depth */
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+}
+
+/* =========================================
+   2. UTILITY CLASSES
+   Single-purpose helper classes applied
+   directly in HTML to handle layout, spacing,
+   and alignment without writing custom CSS.
+   ========================================= */
+
+/* .container: Centers page content with a max-width and horizontal padding */
+.container {
+    max-width: var(--container-width);
+    /* 1200px max to keep text readable */
+    margin: 0 auto;
+    /* Horizontally centers on the page */
+    padding: 0 var(--p-inline);
+    /* 1.5rem side padding on smaller screens */
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* Center-align text */
+.text-left {
+    text-align: left;
+}
+
+/* Left-align text (overrides parent center) */
+
+/* Margin-top utilities (spacing scale: 0.5rem > 1rem > 2rem > 3rem) */
+.mt-2 {
+    margin-top: 0.5rem;
+}
+
+.mt-3 {
+    margin-top: 1rem;
+}
+
+.mt-4 {
+    margin-top: 2rem;
+}
+
+.mt-5 {
+    margin-top: 3rem;
+}
+
+/* Margin-bottom utilities */
+.mb-1 {
+    margin-bottom: 0.25rem;
+}
+
+.mb-2 {
+    margin-bottom: 0.5rem;
+}
+
+.mb-3 {
+    margin-bottom: 1rem;
+}
+
+.mb-4 {
+    margin-bottom: 2rem;
+}
+
+.mb-5 {
+    margin-bottom: 3rem;
+}
+
+/* Padding utilities */
+.pt-5 {
+    padding-top: 3rem;
+}
+
+.pb-0 {
+    padding-bottom: 0 !important;
+}
+
+/* Force removes bottom padding */
+.pb-4 {
+    padding-bottom: 2rem;
+}
+
+/* Centers element horizontally within its parent using margin auto */
+.mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+/* Full-width element */
+.overflow-hidden {
+    overflow: hidden;
+}
+
+/* Clips child overflow (used in carousel) */
+.relative {
+    position: relative;
+}
+
+/* Creates a positioning context for children */
+
+/* Flex helper: horizontally spaces items with vertical centre alignment */
+.flex-between-center {
+    display: flex;
+    justify-content: space-between;
+    /* Push items to opposite ends */
+    align-items: center;
+    /* Vertically centre them */
+}
+
+/* Border utilities: add a subtle 1px divider line to top or bottom of element */
+.border-top {
+    border-top: 1px solid var(--border-color);
+}
+
+.border-bottom {
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* ── TYPOGRAPHY HELPERS ───────────────────────────────── */
+/* Shared heading style for all major section titles */
+.section-title {
+    font-size: 2.25rem;
+    /* ~36px, prominent heading */
+    font-weight: 700;
+    /* Bold */
+    line-height: 1.2;
+    /* Tight leading for display text */
+    margin-bottom: 1rem;
+    color: #111;
+    /* Near-black for contrast */
+}
+
+/* Supporting paragraph below section headings */
+.section-subtitle {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    /* Grey subdued text */
+    margin-bottom: 3rem;
+    /* 48px spacing before content grid */
+    max-width: 700px;
+    /* Constrains line length for readability */
+}
+
+/* =========================================
+   3. BUTTONS & INPUTS
+   All interactive controls: buttons, text
+   inputs, select dropdowns, phone fields.
+   ========================================= */
+
+/* Base button styles shared by all .btn variants.
+   Uses inline-flex to vertically align icon + label text inside the button. */
+.btn {
+    display: inline-flex;
+    /* Aligns icon + text in a row */
+    align-items: center;
+    /* Vertically centres content */
+    justify-content: center;
+    /* Horizontally centres content */
+    padding: 0.75rem 1.5rem;
+    /* Comfortable click target size */
+    border-radius: 8px;
+    /* Rounded corners */
+    font-weight: 500;
+    font-size: 0.95rem;
+    font-family: var(--font-main);
+    /* Matches page font (not browser default) */
+    border: 1px solid transparent;
+    /* Placeholder border for consistent sizing */
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    /* Smooth hover colour change */
+}
+
+/* Primary CTA button: navy blue, used for main actions */
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+}
+
+/* Slightly darker on hover */
+
+/* Secondary button: white with border, used for less prominent actions */
+.btn-secondary {
+    background-color: white;
+    color: #111;
+    border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+    background-color: #f9fafb;
+}
+
+/* Outline button on white backgrounds: transparent fill, navy text */
+.btn-outline-secondary {
+    background-color: transparent;
+    color: var(--primary-color);
+    border: 1px solid var(--border-color);
+}
+
+.btn-outline-secondary:hover {
+    background-color: #f9fafb;
+}
+
+/* Outline button on dark/navy backgrounds: transparent fill, white text */
+.btn-outline-white {
+    background-color: transparent;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.btn-outline-white:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Dark button: near-black background for high-contrast areas */
+.btn-dark {
+    background-color: #1a202c;
+    color: white;
+}
+
+.btn-dark:hover {
+    background-color: #000;
+}
+
+.btn-full-width {
+    width: 100%;
+}
+
+/* Makes button stretch to its container width */
+.btn-quote {
+    padding: 0.85rem 2.5rem;
+    font-size: 1.05rem;
+}
+
+/* Larger CTA used in feature grid */
+
+/* ── FORM INPUTS ──────────────────────────────────────── */
+/* Shared styles for text inputs and select dropdowns */
+.form-input,
+.form-select {
+    width: 100%;
+    /* Full-width by default */
+    padding: 0.75rem 1rem;
+    /* Comfortable input height */
+    border: 1px solid var(--border-color);
+    /* Light grey border */
+    border-radius: 6px;
+    font-family: var(--font-main);
+    /* Match page font (browsers default to system font) */
+    font-size: 0.95rem;
+    color: var(--text-main);
+    background-color: #fff;
+    outline: none;
+    /* Remove default browser focus ring */
+    transition: border-color var(--transition-fast);
+    /* Smooth focus animation */
+}
+
+/* Focus state: highlights border in primary colour for user feedback */
+.form-input:focus,
+.form-select:focus {
+    border-color: var(--primary-color);
+}
+
+/* Phone input: country code selector + number field joined horizontally */
+.phone-input {
+    display: flex;
+}
+
+/* Country code dropdown: fixed 80px width, no right border/radius so it merges with input */
+.phone-input select {
+    width: 80px;
+    border-right: none;
+    /* Removes border between select and input */
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+/* Number input: removes left border-radius so it looks connected to the select */
+.phone-input input {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+/* ── GLOBAL ELEMENT RESETS ───────────────────────────── */
+img {
+    max-width: 100%;
+    display: block;
+}
+
+/* Prevents images from overflowing and removes inline gap */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Removes underlines; uses parent text colour */
+ul {
+    list-style: none;
+}
+
+/* Removes browser bullet points */
+
+/* =========================================
+   4. HEADER & NAVIGATION
+   Two header variants:
+   - .main-header : Static sticky bar at top of page
+   - .sticky-header: Fixed bar that slides in on scroll
+   ========================================= */
+
+/* Flex row with 80px height; spaces logo and nav to opposite ends */
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    /* Logo left, nav right */
+    align-items: center;
+    height: 80px;
+    /* Fixed header height; hero uses calc(100vh - 80px) */
+}
+
+/* Main header: semi-transparent frosted glass effect.
+   position:sticky keeps it at top while scrolling WITHOUT overlapping hero. */
+.main-header {
+    background-color: rgba(255, 255, 255, 0.7);
+    /* Semi-transparent white */
+    backdrop-filter: blur(10px);
+    /* CSS frosted glass blur effect */
+    -webkit-backdrop-filter: blur(10px);
+    /* Safari support */
+    position: sticky;
+    /* Sticks to top on scroll */
+    top: 0;
+    z-index: 90;
+    /* Below sticky header (z:100) */
+}
+
+/* Logo container: line-height set tight to stack multi-line text logos */
+.logo {
+    line-height: 1.1;
+}
+
+/* Legacy text-logo sub-elements (now replaced by logo.png img tag) */
+.logo-red {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--logo-red);
+    letter-spacing: 0.5px;
+}
+
+.logo-sub {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-main);
+    letter-spacing: 1px;
+}
+
+/* Desktop navigation: flex row of links with generous gap */
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+    /* ~40px between links */
+}
+
+/* Nav links (excludes .btn class): medium weight, dark colour */
+.nav-links a:not(.btn) {
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    /* Aligns text + chevron SVG vertically */
+    gap: 4px;
+}
+
+/* Hover turns nav links to primary brand colour */
+.nav-links a:not(.btn):hover {
+    color: var(--primary-color);
+}
+
+/* Dropdown wrapper: position:relative so dropdown panel can be absolutely positioned */
+.dropdown {
+    position: relative;
+    cursor: pointer;
+}
+
+/* ── STICKY HEADER ────────────────────────────────────── */
+/* Fixed header that slides down from top once user scrolls past 150px.
+   JavaScript adds / removes the 'visible' class to trigger the CSS transition. */
+.sticky-header {
+    position: fixed;
+    /* Stays fixed even while scrolling */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    /* Above main header (z:90) */
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    transform: translateY(-100%);
+    /* Hidden above viewport initially */
+    opacity: 0;
+    transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+    /* Smooth slide in */
+}
+
+/* When JS adds 'visible' class: slides the header down into view */
+.sticky-header.visible {
+    transform: translateY(0);
+    /* Returns to natural position */
+    opacity: 1;
+}
+
+/* Hamburger menu icon: hidden on desktop, shown on mobile via media query.
+   3 <span> elements form the 3 horizontal bars of the icon. */
+.mobile-menu-btn {
+    display: none;
+    /* Hidden on desktop */
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+}
+
+/* Each bar of the hamburger icon */
+.mobile-menu-btn span {
+    display: block;
+    width: 25px;
+    height: 2px;
+    /* Thin horizontal bar */
+    background-color: var(--text-main);
+}
+
+/* =========================================
+   5. HERO PRODUCT LAYOUT
+   Two-column grid: image carousel (left)
+   and product info panel (right).
+   Fills the full viewport height minus header.
+   ========================================= */
+
+/* Hero section fills remaining screen height after the 80px header */
+.product-hero {
+    padding: 1.5rem 0;
+    min-height: calc(100vh - 80px);
+    /* Ensures content fills one screen without scrolling */
+    display: flex;
+    /* Enables align-items: center on the section */
+    align-items: center;
+    /* Vertically centres the product-layout grid */
+}
+
+/* Breadcrumb trail: small text path showing page hierarchy */
+.breadcrumbs {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    /* Aligns text + chevron SVG inline */
+    gap: 0.5rem;
+}
+
+.breadcrumbs a {
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+/* Two-column CSS Grid: image gets slightly more space (1.1fr) than info (0.9fr) */
+.product-layout {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    /* Left column slightly wider for image */
+    gap: 2rem;
+    align-items: center;
+    /* Vertically aligns carousel and info panel */
+    width: 100%;
+}
+
+/* ── CAROUSEL ─────────────────────────────────────────── */
+/* Wrapper for the entire left-column gallery (image + thumbnails) */
+.product-gallery {
+    width: 90%;
+    /* Slight inset from the grid edge */
+    margin-top: 1.5rem;
+    /* Pushes the image down from the breadcrumbs row */
+}
+
+/* Relative wrapper needed to position the absolute prev/next buttons */
+.carousel-wrapper {
+    position: relative;
+    /* Positioning context for buttons */
+    border-radius: 20px;
+    /* Rounded corners on the gallery */
+    margin-bottom: 1rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    /* Soft depth shadow */
+}
+
+/* Clips the 20px radius on the carousel image (WebKit mask workaround) */
+.rounded-image-container {
+    border-radius: 20px;
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
+    /* Safari clip fix */
+}
+
+.carousel-container {
+    width: 100%;
+}
+
+/* Takes full width of the wrapper */
+
+/* Flex row of all slides side-by-side.
+   JS uses translateX(-(index * 100)%) to make slides "slide" left. */
+.carousel-track {
+    display: flex;
+    /* Lays slides in a horizontal row */
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    /* Ease-out curve for smooth slide */
+}
+
+/* Each slide: locked at exactly 100% width so only one shows at a time */
+.carousel-item {
+    flex: 0 0 100%;
+    /* flex-grow:0, flex-shrink:0, flex-basis:100% */
+}
+
+/* Hover zoom disabled (scale = 1 = no zoom) */
+.carousel-item:hover .image-wrapper img {
+    transform: scale(1);
+}
+
+/* Image container: fixed aspect ratio prevents layout shift during load */
+.image-wrapper {
+    width: 100%;
+    aspect-ratio: 16/10;
+    /* Wide landscape ratio; shallower than square so hero fits on screen */
+    overflow: hidden;
+    /* Clips any image that extends beyond the box */
+    cursor: zoom-in;
+    /* Visual hint that the image can be enlarged */
+}
+
+/* Image fills the wrapper completely; object-fit:cover crops rather than squishes */
+.image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Crops to fill without distortion */
+    transition: transform 0.4s ease;
+    /* Smooth scale transition on hover */
+}
+
+/* Prev/Next navigation buttons: circular, absolutely positioned over the image */
+.carousel-btn {
+    position: absolute;
+    /* Relative to .carousel-wrapper */
+    top: 50%;
+    /* Vertically centered over image */
+    transform: translateY(-50%);
+    /* Corrects for button's own height */
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    /* Circular shape */
+    background-color: rgba(255, 255, 255, 0.85);
+    /* Semi-transparent white */
+    color: var(--text-main);
+    border: none;
+    cursor: pointer;
+    z-index: 5;
+    /* Renders above the image */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-fast);
+}
+
+.carousel-btn:hover:not(:disabled) {
+    background-color: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Disabled state: faded and not-allowed cursor (active on first/last slide) */
+.carousel-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.prev-btn {
+    left: 20px;
+}
+
+/* Previous button hugs the left edge */
+.next-btn {
+    right: 20px;
+}
+
+/* Next button hugs the right edge */
+
+/* ── THUMBNAILS ───────────────────────────────────────── */
+/* 5-column grid of small preview images below the main carousel */
+.thumbnail-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    /* 5 equal-width thumb slots */
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+/* Individual thumbnail: square, rounded, clickable */
+.thumb {
+    aspect-ratio: 1/1;
+    /* Perfect square */
+    background-color: #ddd;
+    /* Fallback if JS hasn't set background yet */
+    border-radius: 8px;
+    border: 2px solid transparent;
+    /* Invisible border – prevents layout shift on active */
+    cursor: pointer;
+    transition: border var(--transition-fast);
+}
+
+/* Active thumbnail highlights with primary navy border */
+.thumb.active {
+    border-color: var(--primary-color);
+}
+
+/* ── PRODUCT INFO (RIGHT COLUMN) ─────────────────────── */
+/* Main product heading: uses clamp() for fluid responsive font sizing */
+.product-info h1 {
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    /* min 1.6rem, ideal 3vw, max 2.4rem */
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 1rem 0 1rem 0;
+    color: #111;
+    letter-spacing: -0.5px;
+    /* Slight negative tracking for display headings */
+}
+
+/* Certification badges row: wraps on small screens */
+.certifications {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+/* Individual badge chip: white pill with border */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #4b5563;
+    background-color: #fff;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+}
+
+.feature-bullets {
+    margin-bottom: 1.25rem;
+}
+
+/* Spacing below bullet list */
+
+/* Each bullet: icon SVG + text aligned in a flex row */
+.feature-bullets li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    /* Space between SVG icon and text */
+    margin-bottom: 0.6rem;
+    font-weight: 500;
+    color: var(--text-main);
+    font-size: 1rem;
+}
+
+/* Pricing card: white panel with border containing price + shipping badges */
+.price-box {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 1rem 1.5rem;
+    margin-bottom: 1.25rem;
+    border: 1px solid var(--border-color);
+}
+
+.price-label {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.price-value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    letter-spacing: -0.5px;
+}
+
+/* Row of amber-coloured shipping/lead-time badges */
+.shipping-badges {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.ship-badge {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    background-color: #fef3c7;
+    /* Amber-tint background */
+    color: #92400e;
+    /* Deep amber text */
+}
+
+/* =========================================
+   6. TRUSTED BY LOGOS
+   A horizontal strip of partner brand logos
+   used as a social-proof signal.
+   ========================================= */
+
+.trusted-by {
+    padding: 3rem 0;
+}
+
+/* Vertical breathing room around the strip */
+
+/* Section label: small uppercase muted text above the logos */
+.trusted-label {
+    font-size: 0.95rem;
+    color: #9ca3af;
+    /* Light grey – intentionally de-emphasised */
+    font-weight: 500;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    /* ALL CAPS styling */
+    letter-spacing: 1px;
+    /* Spaced letters for a refined label look */
+}
+
+/* Flex row of logos, evenly spaced and wrapping on smaller screens */
+.logo-strip {
+    display: flex;
+    justify-content: space-between;
+    /* Spread logos across the full width */
+    align-items: center;
+    flex-wrap: wrap;
+    /* Wrap onto next line on narrow screens */
+    gap: 2rem;
+    opacity: 0.7;
+    /* Reduced opacity for a subtle, secondary appearance */
+}
+
+/* Individual brand logo: heavy weight text formatted as a mini logo */
+.brand-logo {
+    font-weight: 900;
+    /* Extra bold to mimic logo typography */
+    font-size: 1.25rem;
+    line-height: 1;
+    /* Tight line height to bring tagline close to brand name */
+    letter-spacing: -1px;
+    /* Negative tracking for display-style text */
+    text-align: left;
+}
+
+/* Sub-line tagline text inside each .brand-logo */
+.brand-logo span {
+    font-weight: 500;
+    font-size: 0.45rem;
+    /* Very small to stay proportional */
+    letter-spacing: 2px;
+    /* Wide-spaced for tagline aesthetic */
+    color: #6b7280;
+    text-transform: uppercase;
+}
+
+/* Alternates logo text colour for visual variety */
+.brand-logo:nth-child(even) {
+    color: #111;
+}
+
+/* Dark on even logos */
+.brand-logo:nth-child(odd) {
+    color: #2b3975;
+}
+
+/* Brand navy on odd logos */
+
+/* =========================================
+   7. TECHNICAL SPECIFICATIONS
+   Full-width dark section containing a
+   scrollable data table of product specs.
+   ========================================= */
+
+.tech-specs {
+    padding: 5rem 0;
+    background-color: var(--bg-dark);
+    /* Dark navy background (#121826) */
+    color: var(--text-dark);
+    /* Light text on dark background */
+    border-radius: 0;
+    /* Full-bleed (no rounded corners on section) */
+}
+
+.specs-container h2 {
+    font-size: 2.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: white;
+}
+
+/* Muted sub-description below the section heading */
+.specs-desc {
+    color: #94a3b8;
+    /* Cool grey on dark backgrounds */
+    margin-bottom: 3rem;
+    max-width: 600px;
+    /* Constrains line length for readability */
+}
+
+/* Wrapper enables horizontal scrolling on mobile so table doesn't break layout */
+.table-responsive {
+    overflow-x: auto;
+    /* Horizontal scroll on overflow */
+    background-color: rgba(255, 255, 255, 0.03);
+    /* Barely-visible white tint on dark bg */
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    /* Subtle border visible on dark bg */
+}
+
+.specs-table {
+    width: 100%;
+    border-collapse: collapse;
+    /* Removes double borders between cells */
+    text-align: left;
+}
+
+/* Shared cell padding and row separator line */
+.specs-table th,
+.specs-table td {
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    /* Subtle divider between rows */
+}
+
+/* Column header: small caps, grey, fixed width */
+.specs-table th {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    /* Parameter label in ALL CAPS */
+    color: #94a3b8;
+    /* Muted grey */
+    font-weight: 600;
+    width: 30%;
+    /* Parameter column takes 30% width */
+}
+
+/* Data cell: readable white text */
+.specs-table td {
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: #f1f5f9;
+    /* Near-white for legibility on dark bg */
+}
+
+/* Remove bottom border from the last row to avoid double border with container */
+.specs-table tr:last-child td,
+.specs-table tr:last-child th {
+    border-bottom: none;
+}
+
+/* Inline country flag image in table cells */
+.flag-icon {
+    display: inline-block;
+    vertical-align: middle;
+    /* Aligns flag image with surrounding text */
+    width: 20px;
+    margin-right: 6px;
+    border-radius: 2px;
+}
+
+/* =========================================
+   8. FEATURES GRID
+   6 white cards in a 3-column grid, each
+   showing an SVG icon + feature heading + text.
+   ========================================= */
+
+.features-section {
+    padding: 6rem 0;
+}
+
+/* Large vertical padding for prominence */
+
+/* 3-equal-column grid; collapses to 2 on tablet, 1 on mobile */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* 3 equal columns */
+    gap: 1.5rem;
+}
+
+/* Individual card: white, rounded, subtle shadow, lifts on hover */
+.feature-card {
+    background-color: var(--bg-card);
+    /* White (#fff) */
+    padding: 2.5rem;
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+    /* Very subtle base shadow */
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+/* Hover: card lifts 5px and shadow deepens to indicate interactivity */
+.feature-card:hover {
+    transform: translateY(-5px);
+    /* Lifts card upward */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+    /* Stronger shadow when lifted */
+}
+
+.feature-icon {
+    margin-bottom: 1.25rem;
+}
+
+/* Space between icon and heading */
+.feature-card h3 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: #111;
+    letter-spacing: -0.3px;
+}
+
+.feature-card p {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+/* =========================================
+   9. VERSATILE APPLICATIONS
+   3-column grid of tall image cards with
+   a dark gradient overlay and text at bottom.
+   ========================================= */
+.versatile-apps {
+    padding: 4rem 0;
+}
+
+/* Section header row: title+subtitle on the left, nav arrows on the right */
+.section-top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    /* Aligns arrows to bottom of the title block */
+    margin-bottom: 2.5rem;
+}
+
+/* Override: removes bottom margin when subtitle sits inside section-top-row */
+.section-top-row .section-subtitle {
+    margin-bottom: 0;
+}
+
+/* Circular nav button base: 44px circle, flex-center for the SVG arrow icon */
+.nav-cir-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    /* Makes the button perfectly circular */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+/* Outline variant: transparent background with a light border */
+.nav-cir-btn.outline-btn {
+    border: 1px solid var(--border-color);
+    background: transparent;
+    color: #111;
+    margin-left: 0.5rem;
+    /* Gap between prev and next buttons */
+}
+
+.nav-cir-btn.outline-btn:hover {
+    background: #fff;
+    border-color: var(--primary-color);
+    /* Brand colour on hover */
+    color: var(--primary-color);
+}
+
+/* 3-equal-column grid for application image cards */
+.apps-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* Collapses to 2-col on tablet, 1-col on mobile */
+    gap: 1.5rem;
+}
+
+/* Application card: tall portrait ratio, relative positioning context for overlay + bg image */
+.app-card {
+    position: relative;
+    /* Positions background image and gradient overlay */
+    border-radius: 20px;
+    overflow: hidden;
+    /* Clips the scale(1.05) zoom on hover within the card */
+    aspect-ratio: 4/5;
+    /* Portrait ratio; ~80% height to width */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    /* Pushes text content to the card's bottom */
+}
+
+/* Dark gradient overlay using pseudo-element.
+   Fades from near-black at bottom to transparent at top for text readability. */
+.app-card::after {
+    content: '';
+    /* Required for pseudo-element to render */
+    position: absolute;
+    inset: 0;
+    /* Covers the full card: top/right/bottom/left = 0 */
+    background: linear-gradient(to top,
+            rgba(0, 0, 0, 0.9) 0%,
+            /* Solid at bottom where text sits */
+            rgba(0, 0, 0, 0.3) 50%,
+            /* Semi-transparent mid-way */
+            rgba(0, 0, 0, 0) 100%
+            /* Fully transparent at top */
+        );
+    z-index: 1;
+    /* Stacks above the background image (z:0) */
+}
+
+/* Background image: fills the entire card, positioned behind the overlay */
+.app-card-bg {
+    position: absolute;
+    inset: 0;
+    /* Covers entire card */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Crops image to fill card without distortion */
+    z-index: 0;
+    /* Beneath the gradient overlay (z:1) */
+    transition: transform 0.5s ease;
+    /* Smooth zoom on card hover */
+}
+
+/* On hover: background image zooms in slightly for a parallax-like effect */
+.app-card:hover .app-card-bg {
+    transform: scale(1.05);
+}
+
+/* Text content: stacks above both image (z:0) and overlay (z:1) */
+.app-card-content {
+    position: relative;
+    z-index: 2;
+    /* Above gradient overlay */
+    padding: 2rem;
+    color: white;
+}
+
+.app-card-content h3 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.5px;
+}
+
+.app-card-content p {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.5;
+}
+
+/* =========================================
+   10. MANUFACTURING PROCESS
+   Step-by-step tab navigation inside a
+   white rounded card with text + image layout.
+   ========================================= */
+.manufacturing-process {
+    padding: 5rem 0;
+}
+
+/* White card container wrapping the entire process section */
+.process-card {
+    background-color: #fff;
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+}
+
+/* Horizontal scrollable tab bar connecting the process steps */
+.process-nav {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: none;
+    /* No underline; uses pill tabs instead */
+    margin-bottom: 3rem;
+    overflow-x: auto;
+    /* Scrollable on small screens where tabs overflow */
+    padding-bottom: 1rem;
+}
+
+.process-nav li {
+    flex: 1;
+    /* Each item takes equal space */
+    text-align: center;
+    position: relative;
+    /* Needed for the connecting line pseudo-element */
+}
+
+/* Horizontal connector line drawn between tabs using a pseudo-element */
+.process-nav li::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -50%;
+    /* Starts at the right edge of the tab item */
+    width: 100%;
+    /* Spans to the next tab */
+    height: 1px;
+    background-color: var(--border-color);
+    z-index: 0;
+    /* Behind the tab pill (z:1) */
+}
+
+/* Remove connector after the last tab */
+.process-nav li:last-child::after {
+    display: none;
+}
+
+/* Pill-shaped tab label: white background sits above the connector line */
+.process-nav li span {
+    position: relative;
+    z-index: 1;
+    /* Above the connector line (z:0) */
+    display: inline-block;
+    background-color: #fff;
+    /* White background covers the line beneath */
+    border: 1px solid var(--border-color);
+    padding: 0.5rem 1.25rem;
+    border-radius: 20px;
+    /* Fully rounded pill */
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #6b7280;
+    /* Muted grey for inactive tabs */
+    white-space: nowrap;
+    /* Prevent text wrap inside pill */
+    transition: all 0.2s;
+}
+
+/* Active tab: filled with brand navy colour */
+.process-nav li.active span {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+}
+
+/* Two-column grid: text content left, product image right */
+.process-content-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* Equal columns */
+    gap: 3rem;
+    align-items: center;
+}
+
+.process-text h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #111;
+}
+
+.process-text p {
+    color: var(--text-muted);
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+/* Checklist bullet items with SVG checkmark icon */
+.check-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.check-list li svg {
+    margin-top: 3px;
+    /* Nudges icon down to align with first line of text */
+    flex-shrink: 0;
+    /* Prevents icon from shrinking when text is long */
+}
+
+.process-image img {
+    border-radius: 12px;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    aspect-ratio: 16/10;
+}
+
+/* =========================================
+   11. TESTIMONIALS
+   3-column grid of quote cards with user
+   info badges, a large quote mark, and text.
+   ========================================= */
+.testimonials {
+    padding: 4rem 0 6rem;
+}
+
+/* Extra bottom padding for section separation */
+
+/* 3-equal-column grid; collapses to 2-col on tablet, 1-col on mobile */
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+/* Individual testimony card: vertical flex column to push user-info to the bottom */
+.testimonial-card {
+    background-color: #fff;
+    padding: 2.5rem;
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    /* Allows flex-grow on paragraph to push footer down */
+}
+
+/* Large decorative opening quote mark: serif font for typographic character */
+.quote-icon {
+    font-size: 4rem;
+    /* Very large decorative character */
+    color: var(--primary-color);
+    /* Brand navy colour */
+    font-family: serif;
+    /* Serif for classic quote character appearance */
+    font-weight: bold;
+    line-height: 1;
+    margin-top: -1rem;
+    /* Pulls toward card top edge */
+    margin-bottom: 0.5rem;
+}
+
+.testimonial-card h4 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #111;
+    letter-spacing: -0.3px;
+    line-height: 1.4;
+}
+
+/* Testimonial body text: flex-grow:1 pushes the user-info section to the card's bottom */
+.testimonial-card p {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    flex-grow: 1;
+    /* Takes up remaining space above user-info */
+}
+
+/* User info footer: avatar + name/role, separated from text by a top border */
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 2rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    /* Faint divider above user info */
+    padding-top: 1.5rem;
+}
+
+/* Circular avatar placeholder (no image in current version) */
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    /* Perfect circle */
+    background-color: #e2e8f0;
+    /* Light blue-grey placeholder */
+}
+
+.user-info h5 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #111;
+}
+
+.user-info span {
+    font-size: 0.8rem;
+    color: #6b7280;
+}
+
+/* =========================================
+   12. SOLUTIONS PORTFOLIO
+   3-column card grid showing product types:
+   Fittings, Installation Services, PE-RT Pipes.
+   ========================================= */
+.solutions-portfolio {
+    padding: 4rem 0;
+}
+
+/* 3-equal-column product card grid */
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+/* Vertical flex card: image at top, desc in middle, button at bottom */
+.portfolio-card {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    /* Allows flex-grow on .card-desc to push button down */
+}
+
+.portfolio-card h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: #111;
+    letter-spacing: -0.3px;
+}
+
+/* Description text: flex-grow:1 pushes the button to the bottom of the card */
+.card-desc {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    flex-grow: 1;
+    /* Takes all available vertical space above the button */
+}
+
+/* Product image: fixed aspect-ratio for consistent card heights */
+.portfolio-img {
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    aspect-ratio: 16/9;
+    /* Widescreen ratio for product showcase images */
+    object-fit: cover;
+    width: 100%;
+}
+
+/* Secondary CTA banner at the bottom of the portfolio section */
+.expert-banner {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+}
+
+/* =========================================
+   13. FAQs
+   Accordion-style Q&A list. JS toggles the
+   'open' class on .faq-item to show/hide answers.
+   ========================================= */
+.faqs {
+    padding: 5rem 0;
+}
+
+/* Vertical stack of FAQ items with gap between them */
+.faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+/* Individual FAQ item: white card with rounded corners;
+   overflow:hidden clips the faq-answer when it's display:none */
+.faq-item {
+    background-color: #fff;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+    /* Ensures the answer doesn't peek out when collapsed */
+}
+
+/* Clickable question row: JS attaches click listener to toggle 'open' class */
+.faq-question {
+    padding: 1.25rem 1.5rem;
+    font-weight: 500;
+    color: #111;
+    cursor: pointer;
+    /* Hand cursor signals clickability */
+    font-size: 1rem;
+}
+
+/* Chevron arrow icon: grey by default, rotates 180° and turns navy when open */
+.faq-icon {
+    color: #9ca3af;
+    transition: transform 0.2s;
+}
+
+/* When .faq-item has class 'open': rotate icon upward and change to brand colour */
+.faq-item.open .faq-icon {
+    transform: rotate(180deg);
+    color: var(--primary-color);
+}
+
+/* Answer text: hidden by default, shown when parent has 'open' class */
+.faq-answer {
+    padding: 0 1.5rem 1.25rem;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    display: none;
+    /* Hidden by default; shown via .faq-item.open .faq-answer */
+}
+
+.faq-item.open .faq-answer {
+    display: block;
+}
+
+/* CSS shows answer when JS adds 'open' */
+
+/* Open item gets a faint navy border tint to signal active state */
+.faq-item.open {
+    border-color: rgba(43, 57, 117, 0.2);
+}
+
+/* Email catalogue CTA box below the FAQ list */
+.catalogue-box {
+    background-color: #f8fafc;
+    /* Very light blue-grey tint */
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+}
+
+/* Email input + submit button joined horizontally */
+.catalogue-form {
+    display: flex;
+}
+
+/* =========================================
+   14. RESOURCES & DOWNLOADS
+   A list of downloadable PDF files each
+   with a title and a download icon link.
+   ========================================= */
+.resources {
+    padding: 5rem 0;
+}
+
+/* White container with border, wrapping all download rows */
+.download-list {
+    background-color: #fff;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+}
+
+/* Each downloadable file row: uses .flex-between-center to align name and link */
+.download-item {
+    padding: 1.25rem;
+    font-weight: 500;
+    color: #111;
+    font-size: 0.95rem;
+}
+
+/* Clickable download link: navy text + icon aligned inline */
+.download-link {
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    /* Aligns 'Download PDF' text with SVG download icon */
+    gap: 0.5rem;
+}
+
+.download-link:hover {
+    text-decoration: underline;
+}
+
+/* Standard link hover feedback */
+
+/* =========================================
+   15. CONTACT BLOCK
+   A dark navy rounded section with a contact
+   form panel on the right and CTA text on left.
+   ========================================= */
+.contact-block-section {
+    padding: 4rem 0 6rem;
+}
+
+/* Extra bottom padding */
+
+/* Outer rounded container: deep navy background */
+.contact-box {
+    background-color: var(--bg-blue);
+    /* #23315a deep navy */
+    border-radius: 20px;
+    overflow: hidden;
+    /* Clips the white right-panel inside rounded corners */
+}
+
+/* Left panel: 60% width, contains headline, description, and direct contact details */
+.contact-box-left {
+    padding: 4rem;
+    width: 60%;
+    /* Wider because it holds more textual content */
+}
+
+/* Right panel: white form area, 40% width, vertically centred form */
+.contact-box-right {
+    background-color: #f8fafc;
+    /* Near-white for contrast against the navy left panel */
+    padding: 3rem 4rem;
+    width: 40%;
+    align-self: stretch;
+    /* Stretches to full height of the contact-box */
+    display: flex;
+    align-items: center;
+    /* Vertically centres the form inside the panel */
+}
+
+.form-container {
+    width: 100%;
+}
+
+/* Form fills the entire right panel width */
+
+/* =========================================
+   16. FOOTER
+   White multi-column footer with links,
+   contact details, social icons, and copyright.
+   ========================================= */
+.main-footer {
+    background-color: #fff;
+    padding-top: 4rem;
+}
+
+/* Full-width banner at the top of the footer: newsletter / call-to-action strip */
+.footer-banner {
+    background-color: #fff;
+    padding: 2rem 3rem;
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+}
+
+/* 4-column grid: 3 equal link columns + 1 wider contact column */
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1.5fr;
+    /* Contact column is 50% wider */
+    gap: 3rem;
+}
+
+.footer-col h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #111;
+    margin-bottom: 1.5rem;
+    /* Space below heading before the link list */
+}
+
+/* Footer links and paragraph text: same styles for visual consistency */
+.footer-col a,
+.footer-col p {
+    display: flex;
+    /* Aligns SVG icon inline with text */
+    font-size: 0.9rem;
+    color: #4b5563;
+    /* Dark grey, lighter than headings */
+    margin-bottom: 0.85rem;
+    transition: color 0.2s;
+    align-items: flex-start;
+    /* Aligns multi-line text with top of icon */
+}
+
+.footer-col a:hover {
+    color: var(--primary-color);
+}
+
+/* SVG icon in .contact-info: nudged down and fixed-size to stay aligned */
+.contact-info svg {
+    margin-right: 10px;
+    flex-shrink: 0;
+    /* Prevents icon from shrinking when text is long */
+    margin-top: 3px;
+    /* Aligns icon with first line of text */
+}
+
+/* Social icon row: inline flex with gap between icons */
+.social-icons {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-icons svg {
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.social-icons svg:hover {
+    opacity: 0.7;
+}
+
+/* Semi-transparent on hover for feedback */
+
+
+/* =========================================
+   17. RESPONSIVE BREAKPOINTS
+   Media queries adapt the layout for tablet
+   and mobile viewports.
+   Breakpoints:
+     1024px – Tablet landscape
+     768px  – Tablet portrait / large mobile
+     480px  – Small mobile phones
+   ========================================= */
+
+/* ── TABLET (max-width: 1024px) ─────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+
+    /* Hero: single-column layout on tablets */
+    .product-layout {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    /* Grids collapse from 3-col to 2-col */
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .apps-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .testimonials-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .portfolio-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Manufacturing: text and image stack vertically */
+    .process-content-layout {
+        grid-template-columns: 1fr;
+    }
+
+    /* Contact box: stacks left and right panels vertically */
+    .contact-box {
+        flex-direction: column;
+    }
+
+    .contact-box-left,
+    .contact-box-right {
+        width: 100%;
+        padding: 3rem;
+    }
+
+    /* Footer: 2-column instead of 4-column */
+    .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+}
+
+/* ── MOBILE (max-width: 768px) ──────────────────────────────────────────────── */
+@media (max-width: 768px) {
+
+    /* Navigation: hide desktop links, show hamburger icon */
+    .nav-links {
+        display: none;
+    }
+
+    /* Hidden on mobile */
+    .mobile-menu-btn {
+        display: flex;
+    }
+
+    /* Hamburger becomes visible */
+
+    /* Gallery: full-width on mobile (was 90% on desktop) */
+    .product-gallery {
+        width: 100%;
+    }
+
+    /* All major grids: single column */
+    .features-grid,
+    .apps-grid,
+    .testimonials-grid,
+    .portfolio-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .process-nav {
+        display: none;
+    }
+
+    /* Tab nav hidden on mobile (too narrow) */
+    .thumbnail-row {
+        gap: 0.5rem;
+    }
+
+    /* Tighter gap between thumbnail squares */
+
+    /* Specs table: reduce padding to fit on small screens */
+    .specs-table th,
+    .specs-table td {
+        padding: 0.75rem 1rem;
+    }
+
+    /* Contact panels: smaller padding on mobile */
+    .contact-box-left,
+    .contact-box-right {
+        padding: 2.5rem 1.5rem;
+    }
+
+    /* Footer banner: stacks vertically and centres text */
+    .footer-banner {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+
+    .footer-banner-text {
+        text-align: center !important;
+    }
+
+    /* Footer grid: single column */
+    .footer-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Catalogue email CTA: vertical column layout on mobile */
+    .catalogue-box {
+        flex-direction: column;
+        text-align: left;
+        gap: 1.5rem;
+        align-items: stretch;
+    }
+
+    .catalogue-form {
+        flex-direction: column;
+    }
+
+    /* Catalogue input + button: full width, reset border-radius and margin */
+    .catalogue-form input,
+    .catalogue-form button {
+        width: 100% !important;
+        border-radius: 6px !important;
+        margin-left: 0 !important;
+        margin-bottom: 0.5rem;
+    }
+
+    /* Expert CTA banner: stacks vertically on mobile */
+    .expert-banner {
+        flex-direction: column;
+        text-align: center;
+        gap: 1.5rem;
+    }
+
+    /* Footer bottom row: centres copyright and legal links */
+    .footer-bottom {
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
+    }
+}
+
+/* ── SMALL MOBILE (max-width: 480px) ────────────────────────────────────────── */
+@media (max-width: 480px) {
+
+    /* Reduce heading size on very small screens */
+    .section-title {
+        font-size: 1.75rem;
+    }
+
+    /* Down from 2.25rem */
+
+    /* All section vertical padding reduced to 3rem on small screens */
+    .product-hero,
+    .trusted-by,
+    .tech-specs,
+    .features-section,
+    .versatile-apps,
+    .manufacturing-process,
+    .testimonials,
+    .solutions-portfolio,
+    .faqs,
+    .resources,
+    .contact-block-section,
+    .main-footer {
+        padding-top: 3rem;
+        /* Down from 4-6rem */
+        padding-bottom: 3rem;
+    }
+
+    /* Card internal padding reduced on very small phones */
+    .feature-card,
+    .testimonial-card,
+    .portfolio-card,
+    .process-card,
+    .expert-banner,
+    .catalogue-box {
+        padding: 1.5rem;
+    }
+
+    /* Down from 2rem-2.5rem */
+
+    /* Price display: slightly smaller font on small phones */
+    .price-value {
+        font-size: 1.4rem;
+    }
+
+    /* Down from 1.75rem */
+
+    /* Product h1: reduced to prevent overflow on narrow screens */
+    .product-info h1 {
+        font-size: 1.75rem;
+    }
+
+    /* Down from clamp(1.6-2.4rem) */
+}
